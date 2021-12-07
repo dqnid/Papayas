@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "arbol.h"
 
 Arbol crearArbol(listaPapayas l)
@@ -65,6 +66,7 @@ int expandirArbol(Arbol a)
 
 		a->ramas[i]->coste = evaluarListaPapayas(a->ramas[i]->asignadas);
 		a->ramas[i]->peso = obtenerPesoListaPapayas(a->ramas[i]->asignadas);
+		a->ramas[i]->precio = obtenerPrecioListaPapayas(a->ramas[i]->asignadas);
 	}
 	a->cerrado = 1;
 
@@ -72,6 +74,17 @@ int expandirArbol(Arbol a)
 }
 
 double evaluarListaPapayas(listaPapayas l)
+{
+	// precioBandeja = 0.3 + 2*peso + 0.05*tiempo + 0.1*nPapayas
+	// 2 - 2.1 = 0.1
+	double res,temp;
+	temp = obtenerPesoListaPapayas(l);
+	res = (fabs(PP - temp)) + (PU / l.lista[l.num-1].peso) - (PA / l.lista[l.num-1].tiempo);
+	//res = (fabs(PP - temp)) + (PU / l.lista[l.num-1].peso) + (PA * l.lista[l.num-1].tiempo);
+	return res;
+}
+
+double obtenerPrecioListaPapayas(listaPapayas l)
 {
 	double res;
 	res = PB;
@@ -88,7 +101,6 @@ double obtenerPesoListaPapayas(listaPapayas l)
 	return peso;
 }
 
-//Añadir contador
 void mostrarArbol(Arbol a)
 {
 	int i,j;

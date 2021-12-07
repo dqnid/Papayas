@@ -18,17 +18,17 @@ typedef struct nodo{
 	listaPapayas resto;
 	listaPapayas asignadas;
 	int cerrado;
-	int num; //Número de ramas
+	int num;
 	struct nodo ** ramas;
 	struct nodo * anterior;
 
 	double coste;
+	double precio;
 	double peso;
 }Nodo;
 
 typedef Nodo * Arbol;
 
-//Crear, iniciando el primer nodo
 Arbol crearArbol(listaPapayas l);
 
 /*
@@ -40,10 +40,8 @@ nota: igual es mejor separarlo todo en funciones, por un lado el despliegue del 
 */
 int expandirArbol(Arbol a);
 
-//nodosFinales();
-//backtracking();¿?
-
 double evaluarListaPapayas(listaPapayas l);
+double obtenerPrecioListaPapayas(listaPapayas l);
 double obtenerPesoListaPapayas(listaPapayas l);
 
 void mostrarArbol(Arbol a);
